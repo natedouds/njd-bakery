@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Njd.Bakery.Repository
+namespace Njd.Bakery.Repository.EfModels
 {
     public class ProductCategory
     {

@@ -1,9 +1,8 @@
-﻿using Njd.Bakery.Repository.EfModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace Njd.Bakery.Repository
+namespace Njd.Bakery.Repository.EfModels
 {
     public class Ingredient
     {

@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Njd.Bakery.Repository;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace WebApplication1
+namespace Njd.Bakery.Api
 {
     public class Startup
     {
@@ -31,6 +31,9 @@ namespace WebApplication1
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
+
+            services.AddDbContext<BakeryContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
