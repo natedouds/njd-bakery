@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Njd.Bakery.Repository;
+using Njd.Bakery.Repository.EfModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,9 +19,9 @@ namespace Njd.Bakery.Api.Controllers
 
         // GET api/products
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Product>> Get()
         {
-            return new[] { "value1", "value2" };
+            return Ok(_context.Products.ToList());
         }
 
         // GET api/products/categories
@@ -30,5 +31,25 @@ namespace Njd.Bakery.Api.Controllers
             return Ok(_context.ProductCategories.ToList());
         }
 
+        //[HttpPost]
+        //public ActionResult<int> CreateProduct()
+        //{
+        //    var ingredients = _context.Ingredients.ToList();
+
+        //    var newProduct = new Product
+        //    {
+        //        Name = "Chocolate chip cookies",
+        //        CanBeEggFree = true,
+        //        DefaultNumberOfServings = 12,
+        //        Sku = "chocChipCookieSku",
+        //        TotalBatchCalories = 1200,
+        //        TotalBatchCarbs = 200,
+        //        TotalBatchFat = 500,
+        //        TotalBatchFiber = 150,
+        //        TotalBatchProtein = 75,
+        //        TotalBatchSugar = 600,
+        //        Ingredient
+        //    }
+        //}
     }
 }
