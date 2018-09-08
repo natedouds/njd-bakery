@@ -28,7 +28,7 @@ namespace Njd.Bakery.Api.Controllers
         [HttpGet("categories")]
         public ActionResult<IEnumerable<string>> GetProductCategories()
         {
-            return Ok(_context.ProductCategories.ToList());
+            return Ok(_context.ProductCategories.OrderBy(x => x.Name).ToList());
         }
 
         //[HttpPost]
