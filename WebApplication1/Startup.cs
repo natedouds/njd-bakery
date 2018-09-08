@@ -23,16 +23,15 @@ namespace Njd.Bakery.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<BakeryContext>(s =>
-                s.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
 
-            services.AddDbContext<BakeryContext>(options =>
+            services
+                .AddEntityFrameworkSqlServer()
+                .AddDbContext<BakeryContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
