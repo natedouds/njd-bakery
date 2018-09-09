@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace Njd.Bakery.Repository.EfModels
 {
@@ -36,7 +35,7 @@ namespace Njd.Bakery.Repository.EfModels
 
         public ProductCategory Category { get; set; }
         public ProductClassification Classification { get; set; }
-        public IEnumerable<Product> ProductVariations { get; set; } = Enumerable.Empty<Product>();
-        public IEnumerable<ProductIngredient> ProductIngredients { get; set; } = Enumerable.Empty<ProductIngredient>();
+        public IEnumerable<Product> ProductVariations { get; set; }
+        public IEnumerable<ProductIngredient> ProductIngredients { get; set; }
     }
 }
