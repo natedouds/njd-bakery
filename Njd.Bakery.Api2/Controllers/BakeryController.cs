@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Njd.Bakery.Repository;
 using Njd.Bakery.Repository.EfModels;
 using System.Collections.Generic;
@@ -21,7 +22,14 @@ namespace Njd.Bakery.Api2.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Product>> Get()
         {
-            return Ok(_context.Products.ToList());
+            var products = _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Classification)
+                .Include(p => p.ProductVariations)
+                .Include(p => p.ProductIngredients)
+                    .ThenInclude(pi => pi.Ingredient);
+
+            return Ok(products);
         }
 
         // GET api/products/categories
