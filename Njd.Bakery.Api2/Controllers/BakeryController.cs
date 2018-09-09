@@ -4,7 +4,7 @@ using Njd.Bakery.Repository.EfModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Njd.Bakery.Api.Controllers
+namespace Njd.Bakery.Api2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
