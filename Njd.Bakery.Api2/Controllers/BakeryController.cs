@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Njd.Bakery.Api2.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -37,6 +37,13 @@ namespace Njd.Bakery.Api2.Controllers
         public ActionResult<IEnumerable<string>> GetProductCategories()
         {
             return Ok(_context.ProductCategories.OrderBy(x => x.Name).ToList());
+        }
+
+        // GET api/products/classifications
+        [HttpGet("classifications")]
+        public ActionResult<IEnumerable<string>> GetProductClassifications()
+        {
+            return Ok(_context.ProductClassifications.OrderBy(x => x.Name).ToList());
         }
 
         //[HttpPost]
