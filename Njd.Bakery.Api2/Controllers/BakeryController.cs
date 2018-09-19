@@ -32,6 +32,23 @@ namespace Njd.Bakery.Api2.Controllers
             return Ok(products);
         }
 
+        // GET api/products/{id}
+        [HttpGet("{id}")]
+        public ActionResult<Product> GetProductById(int id)
+        {
+            var product = _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Classification)
+                .Include(p => p.ProductVariations)
+                .Include(p => p.ProductIngredients)
+                .ThenInclude(pi => pi.Ingredient)
+                .FirstOrDefault(p => p.Id == id);
+
+            return product == null ?
+                (ActionResult<Product>)NotFound($"Product not found for id: {id}") :
+                Ok(product);
+        }
+
         // GET api/products/categories
         [HttpGet("categories")]
         public ActionResult<IEnumerable<string>> GetProductCategories()
