@@ -22,10 +22,14 @@ namespace Njd.Bakery.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
-                    options.AddPolicy("AllowAllOrigins",
+                    options.AddPolicy("AllowAll",
                     builder =>
                     {
-                        builder.AllowAnyOrigin();
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials();
                     })
                 );
 
