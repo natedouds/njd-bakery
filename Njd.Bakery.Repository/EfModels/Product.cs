@@ -15,6 +15,8 @@ namespace Njd.Bakery.Repository.EfModels
         public bool IsDefaultProduct { get; set; }
         public bool GlutenFree { get; set; }
         public bool CanBeGlutenFree { get; set; }
+        public bool GrainFree { get; set; }
+        public bool CanBeGrainFree { get; set; }
         public bool DairyFree { get; set; }
         public bool CanBeDairyFree { get; set; }
         public bool EggFree { get; set; }
