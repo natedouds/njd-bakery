@@ -5,7 +5,7 @@ using Njd.Bakery.Repository.EfModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Njd.Bakery.Api2.Controllers
+namespace Njd.Bakery.Api.Controllers
 {
     [Route("api/products")]
     [ApiController]
@@ -20,16 +20,22 @@ namespace Njd.Bakery.Api2.Controllers
 
         // GET api/products
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public ActionResult<IEnumerable<Product>> Get(bool? parentsOnly)
         {
-            var products = _context.Products
+            var productsQuery = _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Classification)
                 .Include(p => p.ProductVariations)
                 .Include(p => p.ProductIngredients)
-                    .ThenInclude(pi => pi.Ingredient);
+                    .ThenInclude(pi => pi.Ingredient)
+                .AsQueryable();
 
-            return Ok(products);
+            if (parentsOnly == true)
+            {
+                productsQuery = productsQuery.Where(p => p.ParentProductId == null);
+            }
+
+            return Ok(productsQuery);
         }
 
         // GET api/products/{id}
@@ -63,25 +69,5 @@ namespace Njd.Bakery.Api2.Controllers
             return Ok(_context.ProductClassifications.OrderBy(x => x.Name).ToList());
         }
 
-        //[HttpPost]
-        //public ActionResult<int> CreateProduct()
-        //{
-        //    var ingredients = _context.Ingredients.ToList();
-
-        //    var newProduct = new Product
-        //    {
-        //        Name = "Chocolate chip cookies",
-        //        CanBeEggFree = true,
-        //        DefaultNumberOfServings = 12,
-        //        Sku = "chocChipCookieSku",
-        //        TotalBatchCalories = 1200,
-        //        TotalBatchCarbs = 200,
-        //        TotalBatchFat = 500,
-        //        TotalBatchFiber = 150,
-        //        TotalBatchProtein = 75,
-        //        TotalBatchSugar = 600,
-        //        Ingredient
-        //    }
-        //}
     }
 }
