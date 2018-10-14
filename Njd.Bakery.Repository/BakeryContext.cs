@@ -24,12 +24,12 @@ namespace Njd.Bakery.Repository
             modelBuilder.Entity<ProductIngredient>()
                 .HasOne(pt => pt.Product)
                 .WithMany(p => p.ProductIngredients)
-                .HasForeignKey(pt => pt.IngredientId);
+                .HasForeignKey(pt => pt.ProductId);
 
             modelBuilder.Entity<ProductIngredient>()
                 .HasOne(pt => pt.Ingredient)
                 .WithMany(t => t.ProductIngredients)
-                .HasForeignKey(pt => pt.ProductId);
+                .HasForeignKey(pt => pt.IngredientId);
 
             modelBuilder.Entity<Product>(ep =>
             {
