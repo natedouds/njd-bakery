@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace Njd.Bakery.Repository.EfModels
 {
@@ -10,6 +9,6 @@ namespace Njd.Bakery.Repository.EfModels
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public IEnumerable<ProductIngredient> ProductIngredients { get; set; } = Enumerable.Empty<ProductIngredient>();
+        public IList<ProductIngredient> ProductIngredients { get; set; } = new List<ProductIngredient>();
     }
 }

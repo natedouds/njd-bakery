@@ -7,12 +7,11 @@ namespace Njd.Bakery.Repository.EfModels
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int? ParentProductId { get; set; }
         public string Name { get; set; }
         // this would probably be the unique public facing identifier
         public string Sku { get; set; }
         // the goal here is that default will be the highest level, but it can have nested alternates for allergies
-        public bool IsDefaultProduct { get; set; }
+        public bool IsDefaultProduct => ParentId == null;
         public bool GlutenFree { get; set; }
         public bool CanBeGlutenFree { get; set; }
         public bool GrainFree { get; set; }
@@ -35,9 +34,12 @@ namespace Njd.Bakery.Repository.EfModels
         public decimal TotalBatchSugar { get; set; }
         public decimal TotalBatchProtein { get; set; }
 
+        public Product Parent { get; set; }
+        public int? ParentId { get; set; }
+
         public ProductCategory Category { get; set; }
         public ProductClassification Classification { get; set; }
-        public IEnumerable<Product> ProductVariations { get; set; }
-        public IEnumerable<ProductIngredient> ProductIngredients { get; set; }
+        public IList<Product> ProductVariations { get; set; } = new List<Product>();
+        public IList<ProductIngredient> ProductIngredients { get; set; } = new List<ProductIngredient>();
     }
 }
