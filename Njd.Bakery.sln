@@ -5,7 +5,12 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Njd.Bakery.Repository", "Njd.Bakery.Repository\Njd.Bakery.Repository.csproj", "{8F68518C-4DAD-40EC-A4C9-AF66153F24C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Njd.Bakery.Api", "Njd.Bakery.Api2\Njd.Bakery.Api.csproj", "{7C52E592-12AE-42E7-87A0-F3E39E1877EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Njd.Bakery.Api", "Njd.Bakery.Api2\Njd.Bakery.Api.csproj", "{7C52E592-12AE-42E7-87A0-F3E39E1877EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Docs", "Solution Docs", "{76744934-21EB-473B-8447-325D3E6F8EB1}"
+	ProjectSection(SolutionItems) = preProject
+		ignore.txt = ignore.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
