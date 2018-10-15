@@ -41,7 +41,7 @@ namespace Njd.Bakery.Api.Controllers
         }
 
         // GET api/products/{id}
-        [HttpGet("products/{id}")]
+        [HttpGet("products/{id}"), ActionName("GetProductById")]
         public ActionResult<Product> GetProductById(int id)
         {
             var product = _context.Products
@@ -103,6 +103,15 @@ namespace Njd.Bakery.Api.Controllers
             await _context.SaveChangesAsync();
 
             return Created("", product);
+        }
+
+        // api/products
+        [HttpPost("products")]
+        public async Task<IActionResult> CreateProduct(Product product)
+        {
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+            return Created($"api/products/{product.Id}", product);
         }
     }
 }
