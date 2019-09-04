@@ -81,6 +81,24 @@ namespace Njd.Bakery.Api.Controllers
             return Created("", ingredients);
         }
 
+        // GET api/ingredients
+        [HttpGet("ingredients")]
+        public async Task<IActionResult> GetIngredients()
+        {
+            var ingredients = await _context.Ingredients.ToListAsync();
+
+            return Ok(ingredients);
+        }
+
+        // GET api/products/ingredients
+        [HttpGet("products/ingredients")]
+        public async Task<IActionResult> GetProductIngredients()
+        {
+            var ingredients = await _context.ProductIngredients.ToListAsync();
+
+            return Ok(ingredients);
+        }
+
         // POST api/products/ingredients
         [HttpPost("products/ingredients")]
         public async Task<IActionResult> CreateProductIngredients(CreateProductIngredientsRequest req)
