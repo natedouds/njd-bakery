@@ -15,7 +15,7 @@ namespace Njd.Bakery.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -34,9 +34,8 @@ namespace Njd.Bakery.Repository.Migrations
 
             modelBuilder.Entity("Njd.Bakery.Repository.EfModels.Product", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("CanBeDairyFree");
 
@@ -72,6 +71,8 @@ namespace Njd.Bakery.Repository.Migrations
 
                     b.Property<int?>("ParentId");
 
+                    b.Property<string>("ParentId1");
+
                     b.Property<bool>("RefinedSugarFree");
 
                     b.Property<string>("Sku");
@@ -102,7 +103,7 @@ namespace Njd.Bakery.Repository.Migrations
 
                     b.HasIndex("ClassificationId");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ParentId1");
 
                     b.ToTable("Products");
                 });
@@ -120,14 +121,41 @@ namespace Njd.Bakery.Repository.Migrations
                     b.ToTable("ProductCategories");
 
                     b.HasData(
-                        new { Id = 1, Name = "Snack Bars" },
-                        new { Id = 2, Name = "Cakes" },
-                        new { Id = 3, Name = "Breads" },
-                        new { Id = 4, Name = "Cookies" },
-                        new { Id = 5, Name = "Dessert Bars" },
-                        new { Id = 6, Name = "Misc" },
-                        new { Id = 7, Name = "Muffins" }
-                    );
+                        new
+                        {
+                            Id = 1,
+                            Name = "Snack Bars"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Cakes"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Breads"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Cookies"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Dessert Bars"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Misc"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Muffins"
+                        });
                 });
 
             modelBuilder.Entity("Njd.Bakery.Repository.EfModels.ProductClassification", b =>
@@ -143,16 +171,31 @@ namespace Njd.Bakery.Repository.Migrations
                     b.ToTable("ProductClassifications");
 
                     b.HasData(
-                        new { Id = 1, Name = "Simple Dessert" },
-                        new { Id = 2, Name = "Involved Dessert" },
-                        new { Id = 3, Name = "Snack" },
-                        new { Id = 4, Name = "Bread" }
-                    );
+                        new
+                        {
+                            Id = 1,
+                            Name = "Simple Dessert"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Involved Dessert"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Snack"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Bread"
+                        });
                 });
 
             modelBuilder.Entity("Njd.Bakery.Repository.EfModels.ProductIngredient", b =>
                 {
-                    b.Property<int>("ProductId");
+                    b.Property<string>("ProductId");
 
                     b.Property<int>("IngredientId");
 
@@ -175,7 +218,7 @@ namespace Njd.Bakery.Repository.Migrations
 
                     b.HasOne("Njd.Bakery.Repository.EfModels.Product", "Parent")
                         .WithMany("ProductVariations")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId1");
                 });
 
             modelBuilder.Entity("Njd.Bakery.Repository.EfModels.ProductIngredient", b =>

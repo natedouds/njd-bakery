@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Njd.Bakery.Repository.EfModels
 {
     public class Product
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
+        [Key]
+        public string Id { get; set; }
+        
         public string Name { get; set; }
         // this would probably be the unique public facing identifier
         public string Sku { get; set; }
-
         public bool DairyFree { get; set; }
         public bool CanBeDairyFree { get; set; }
         public bool EggFree { get; set; }

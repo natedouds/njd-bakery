@@ -17,7 +17,7 @@ namespace Njd.Bakery.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            
             modelBuilder.Entity<ProductIngredient>()
                 .HasKey(t => new { t.ProductId, t.IngredientId });
 

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Njd.Bakery.Api.Controllers.Models;
 using Njd.Bakery.Repository;
 using Njd.Bakery.Repository.EfModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Njd.Bakery.Api.Models;
 
 namespace Njd.Bakery.Api.Controllers
 {
@@ -42,7 +42,7 @@ namespace Njd.Bakery.Api.Controllers
 
         // GET api/products/{id}
         [HttpGet("products/{id}"), ActionName("GetProductById")]
-        public ActionResult<Product> GetProductById(int id)
+        public ActionResult<Product> GetProductById(string id)
         {
             var product = _context.Products
                 .Include(p => p.Category)

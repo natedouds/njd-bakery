@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Njd.Bakery.Api.Controllers.Models
+namespace Njd.Bakery.Api.Models
 {
     public class CreateProductIngredientsRequest
     {
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
         public IEnumerable<int> IngredientIds { get; set; }
     }
 }

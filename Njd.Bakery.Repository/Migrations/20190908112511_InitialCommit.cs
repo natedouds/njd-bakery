@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Njd.Bakery.Repository.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,22 +50,21 @@ namespace Njd.Bakery.Repository.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ParentProductId = table.Column<int>(nullable: true),
+                    Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Sku = table.Column<string>(nullable: true),
-                    IsDefaultProduct = table.Column<bool>(nullable: false),
-                    GlutenFree = table.Column<bool>(nullable: false),
-                    CanBeGlutenFree = table.Column<bool>(nullable: false),
                     DairyFree = table.Column<bool>(nullable: false),
                     CanBeDairyFree = table.Column<bool>(nullable: false),
                     EggFree = table.Column<bool>(nullable: false),
                     CanBeEggFree = table.Column<bool>(nullable: false),
-                    RefinedSugarFree = table.Column<bool>(nullable: false),
-                    CanBeRefinedSugarFree = table.Column<bool>(nullable: false),
+                    GlutenFree = table.Column<bool>(nullable: false),
+                    CanBeGlutenFree = table.Column<bool>(nullable: false),
+                    GrainFree = table.Column<bool>(nullable: false),
+                    CanBeGrainFree = table.Column<bool>(nullable: false),
                     NutFree = table.Column<bool>(nullable: false),
                     CanBeNutFree = table.Column<bool>(nullable: false),
+                    RefinedSugarFree = table.Column<bool>(nullable: false),
+                    CanBeRefinedSugarFree = table.Column<bool>(nullable: false),
                     Vegan = table.Column<bool>(nullable: false),
                     CanBeVegan = table.Column<bool>(nullable: false),
                     DefaultNumberOfServings = table.Column<int>(nullable: false),
@@ -75,9 +74,10 @@ namespace Njd.Bakery.Repository.Migrations
                     TotalBatchFiber = table.Column<decimal>(type: "decimal(9, 4)", nullable: false),
                     TotalBatchSugar = table.Column<decimal>(type: "decimal(9, 4)", nullable: false),
                     TotalBatchProtein = table.Column<decimal>(type: "decimal(9, 4)", nullable: false),
+                    ParentId1 = table.Column<string>(nullable: true),
+                    ParentId = table.Column<int>(nullable: true),
                     CategoryId = table.Column<int>(nullable: true),
-                    ClassificationId = table.Column<int>(nullable: true),
-                    ProductId = table.Column<int>(nullable: true)
+                    ClassificationId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,8 +95,8 @@ namespace Njd.Bakery.Repository.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Products_Products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_Products_Products_ParentId1",
+                        column: x => x.ParentId1,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -106,22 +106,22 @@ namespace Njd.Bakery.Repository.Migrations
                 name: "ProductIngredients",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<string>(nullable: false),
                     IngredientId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductIngredients", x => new { x.ProductId, x.IngredientId });
                     table.ForeignKey(
-                        name: "FK_ProductIngredients_Products_IngredientId",
+                        name: "FK_ProductIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
-                        principalTable: "Products",
+                        principalTable: "Ingredients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductIngredients_Ingredients_ProductId",
+                        name: "FK_ProductIngredients_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Ingredients",
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -167,9 +167,9 @@ namespace Njd.Bakery.Repository.Migrations
                 column: "ClassificationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_ProductId",
+                name: "IX_Products_ParentId1",
                 table: "Products",
-                column: "ProductId");
+                column: "ParentId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -178,10 +178,10 @@ namespace Njd.Bakery.Repository.Migrations
                 name: "ProductIngredients");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Ingredients");
 
             migrationBuilder.DropTable(
-                name: "Ingredients");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "ProductCategories");

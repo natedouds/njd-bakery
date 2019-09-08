@@ -41,9 +41,11 @@ namespace Njd.Bakery.Api
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
 
+            var connStr = Configuration.GetConnectionString("BakeryContextConnectionString");
+
             services
                 .AddDbContext<BakeryContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("BakeryConnectionString")));
+                options.UseSqlServer(connStr));
 
         }
 
@@ -52,10 +54,10 @@ namespace Njd.Bakery.Api
         {
             app.UseCors("MyPolicy");
 
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
-            }
+            //}
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
